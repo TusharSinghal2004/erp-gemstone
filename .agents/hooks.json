@@ -1,0 +1,47 @@
+{
+  "schema-protection": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "replace_file_content|multi_replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .agents/hooks-scripts/block-schema-write.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "ledger-protection": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "run_command|replace_file_content|multi_replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .agents/hooks-scripts/block-ledger-mutation.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "barcode-uniqueness": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "replace_file_content|multi_replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python .agents/hooks-scripts/protect-barcode-constraint.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
